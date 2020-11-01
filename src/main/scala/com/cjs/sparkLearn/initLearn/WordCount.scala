@@ -10,8 +10,11 @@ object WordCount {
 
     val sc = new SparkContext(conf)
 
+    println(WordCount.getClass.getResource("./createRDD.txt").toString)
+
     //装饰器模式层层包装
-    val value: RDD[String] = sc.textFile("hdfs://hadoop1:8020/tmp/sparklearn/wordcount.txt");
+    //    val value: RDD[String] = sc.textFile("hdfs://hadoop1:8020/tmp/sparklearn/wordcount.txt");
+    val value: RDD[String] = sc.textFile(WordCount.getClass.getResource("./createRDD.txt").toString)
 
     val value1: RDD[String] = value.flatMap(_.split(" "))
 
