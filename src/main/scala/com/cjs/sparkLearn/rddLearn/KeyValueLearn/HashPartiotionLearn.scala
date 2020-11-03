@@ -15,6 +15,7 @@ object HashPartiotionLearn {
     val rdd2: RDD[(Int, String)] = rdd1.partitionBy(new HashPartitioner(2)) //指定分区数
 
     println(rdd2.glom().map(_.toList).collect().mkString(", "))
+//    rdd2.saveAsTextFile("output")
   }
 
 }
