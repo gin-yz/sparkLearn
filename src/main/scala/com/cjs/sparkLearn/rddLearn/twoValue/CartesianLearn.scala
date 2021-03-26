@@ -1,4 +1,4 @@
-//迪卡尔集
+//迪卡尔积
 package com.cjs.sparkLearn.rddLearn.twoValue
 
 import org.apache.spark.{SparkConf, SparkContext}

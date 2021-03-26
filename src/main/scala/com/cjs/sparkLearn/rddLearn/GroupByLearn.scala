@@ -11,9 +11,16 @@ object GroupByLearn {
 
     val sc = new SparkContext(conf)
 
-    val value: RDD[Int] = sc.makeRDD(1 to 16)
+    val value: RDD[Int] = sc.makeRDD(1 to 16,8)
+
+    val value2 = value.glom()
+    println(value2.collect().map(_.toList).toList)
 
     val value1: RDD[(Int, Iterable[Int])] = value.groupBy(_ % 2)
+
+    value1.saveAsTextFile("./output")
+
+    println(value1.glom().map(_.toList).collect().toList)
 
     value1.foreach(println)
 

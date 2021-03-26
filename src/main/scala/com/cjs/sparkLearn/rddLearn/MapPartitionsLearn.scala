@@ -31,7 +31,7 @@ object MapPartitionsLearn {
     })
     indexValue.foreach(println)
 
-    //模式匹配
+    //可以将小括号换成大括号
     val indexValue2: RDD[(String, Int)] = value.mapPartitionsWithIndex {
       (index, items) => {
         items.map((_, index))

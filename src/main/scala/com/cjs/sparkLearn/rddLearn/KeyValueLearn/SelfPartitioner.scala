@@ -6,6 +6,15 @@ import org.apache.spark.{Partitioner, SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
 
 object SelfPartitioner {
+
+  class MyPartitionar(partitions: Int) extends Partitioner {
+    override def numPartitions: Int = partitions //分区数
+
+    override def getPartition(key: Any): Int = {
+      key.hashCode() % numPartitions
+    }
+  }
+
   def main(args: Array[String]): Unit = {
     val conf: SparkConf = new SparkConf().setAppName("SelfPartitioner").setMaster("local[*]")
 
@@ -15,15 +24,9 @@ object SelfPartitioner {
 
     val value: RDD[(Int, String)] = rdd1.partitionBy(new MyPartitionar(3))
 
+    //result:List(List((3,ccc)), List((1,aaa), (4,ddd)), List((2,bbb)))
     println(value.glom().map(_.toList).collect().toList)
 
   }
 }
 
-class MyPartitionar(partitions: Int) extends Partitioner {
-  override def numPartitions: Int = partitions //分区数
-
-  override def getPartition(key: Any): Int = {
-    key.hashCode() % numPartitions
-  }
-}

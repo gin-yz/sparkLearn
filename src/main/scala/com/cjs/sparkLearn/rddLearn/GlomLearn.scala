@@ -18,5 +18,12 @@ object GlomLearn {
     glomRDD.collect().foreach(array=>{
       println(array.mkString(", "))
     })
+
+    //计算每个分区的最大求和
+    val value1:Double = glomRDD.map(_.foldLeft(Int.MinValue)(Math.max)).sum()
+
+    println(value1)
+
+    sc.stop()
   }
 }

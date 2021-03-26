@@ -23,6 +23,12 @@
             <artifactId>scala-maven-plugin</artifactId>
             <version>3.2.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.14.1</version>
+        </dependency>
+
 
     </dependencies>
     <build>
@@ -59,7 +65,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.cjs.scalaAdvanceLearn.initDemo.BuyCafeEx</mainClass>
+                            <mainClass>com.cjs.sparkLearn.initLearn.WordCountTest</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

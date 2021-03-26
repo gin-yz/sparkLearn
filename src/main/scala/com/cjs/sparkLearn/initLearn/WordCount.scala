@@ -2,6 +2,7 @@ package com.cjs.sparkLearn.initLearn
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
+import org.slf4j.LoggerFactory
 
 object WordCount {
   def main(args: Array[String]): Unit = {
@@ -13,7 +14,8 @@ object WordCount {
     println(WordCount.getClass.getResource("./createRDD.txt").toString)
 
     //装饰器模式层层包装
-    //    val value: RDD[String] = sc.textFile("hdfs://hadoop1:8020/tmp/sparklearn/wordcount.txt");
+//    val value: RDD[String] = sc.textFile("hdfs://hadoop1:8020/tmp/sparklearn/wordcount.txt");
+    //默认是按照行来取，一个行分配成一
     val value: RDD[String] = sc.textFile(WordCount.getClass.getResource("./createRDD.txt").toString)
 
     val value1: RDD[String] = value.flatMap(_.split(" "))
@@ -24,8 +26,18 @@ object WordCount {
 
     val tuples: Array[(String, Int)] = value3.collect()
 
+    //方法二，使用个group by
+    val value4:RDD[(String,Int)] = value.flatMap(_.split(" ")).groupBy(x=>x).map(item =>
+      (item._1, item._2.foldLeft(0)((sum, x) => sum + 1))
+    )
+    val tuples2 = value4.collect().toList
+    //或者
+    val value5 = value.flatMap(_.split(" ")).groupBy(x => x).map(item=>(item._1,item._2.count(_=>true))).collect().toList
+
+
     sc.stop()
     println(tuples.mkString("Array(", ", ", ")"))
-
+    println(tuples2)
+    println(value5)
   }
 }

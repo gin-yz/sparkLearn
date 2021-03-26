@@ -11,14 +11,14 @@ object ReduceByKeyLearn {
 
     val rdd1: RDD[(Int, Int)] = sc.parallelize(Array((1, 100), (1, 200), (2, 3000),(3, 5000), (4, 1),(4, 2)),4)
 
-    val value: RDD[(Int, Int)] = rdd1.reduceByKey((a, b) => a + b)
+    val value: RDD[(Int, Int)] = rdd1.reduceByKey((a, b) => a + b,2)
 
     val value1: RDD[(Int, Int)] = rdd1.foldByKey(100) {
       _ + _
     }
 
     println(rdd1.glom().map(_.toList).collect().toList)
-
+    println(value.glom().map(_.toList).collect().toList)
     println(value.collect().toList)
     println(value1.collect().toList)
   }

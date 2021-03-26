@@ -12,7 +12,11 @@ object SortByLearn {
     val value: RDD[Int] = sc.makeRDD(1 to 16)
 
     //依照排好序的组进行排列,结果(2, 5, 8, 11, 14, 1, 4, 7, 10, 13, 16, 3, 6, 9, 12, 15)
+    //按照％３后排序，降序
     val value1: RDD[Int] = value.sortBy(_ % 3, ascending = false)
+
+    //十六个分区，一个分区一个数
+    println(value.glom().map(_.toList).collect().toList)
 
     //使用glom将分区分组
     val value2: RDD[List[Int]] = value.sortBy(_ % 3).glom().filter(!_.isEmpty).map(_.toList)
