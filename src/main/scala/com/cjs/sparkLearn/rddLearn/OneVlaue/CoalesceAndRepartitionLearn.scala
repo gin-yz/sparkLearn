@@ -1,8 +1,7 @@
-//coalesce用于缩减对应分区,repartition本质上是调用coalesce,
-package com.cjs.sparkLearn.rddLearn
+package com.cjs.sparkLearn.rddLearn.OneVlaue
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
 
 object CoalesceAndRepartitionLearn {
   def main(args: Array[String]): Unit = {
@@ -10,7 +9,7 @@ object CoalesceAndRepartitionLearn {
 
     val sc = new SparkContext(conf)
 
-    val value: RDD[Int] = sc.makeRDD(1 to 16,8)
+    val value: RDD[Int] = sc.makeRDD(1 to 16, 8)
     println(value.getNumPartitions)
 
     val value1: RDD[Int] = value.coalesce(4, shuffle = true) //suffle参数用于指定是否洗牌

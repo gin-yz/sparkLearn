@@ -1,14 +1,10 @@
-/*
-* 两个RDD之间增加缓存，防止后面rdd失效,可以随时从此cache点读
-* persist和cache方法，cache方法是persist方法的调用
-* */
-package com.cjs.sparkLearn.rddLearn
+package com.cjs.sparkLearn.rddLearn.OneVlaue
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.storage.StorageLevel
+import org.apache.spark.{SparkConf, SparkContext}
 
-object CacheLearn{
+object CacheLearn {
   def main(args: Array[String]): Unit = {
     val conf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("AggregateLearn")
 
@@ -16,8 +12,13 @@ object CacheLearn{
 
     val rdd: RDD[List[Int]] = sc.makeRDD(Array(List(1, 2, 3), List(4, 5, 6)), 2)
 
+    //两种方式存在内存中，是一样的．
     val rdd1 = rdd.persist(StorageLevel.MEMORY_ONLY)
-//    val rdd2 = rdd.cache()
+    //    val rdd2 = rdd.cache()
+
+    //还有几种级别的ｃａｃｈｅ存储,具体区别看教程
+    //    rdd.persist(StorageLevel.DISK_ONLY)
+    //    rdd.persist(StorageLevel.MEMORY_AND_DISK)
 
   }
 }

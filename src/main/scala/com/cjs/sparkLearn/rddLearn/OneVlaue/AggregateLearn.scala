@@ -1,8 +1,7 @@
-//将两个分片的先加再相乘
-package com.cjs.sparkLearn.rddLearn
+package com.cjs.sparkLearn.rddLearn.OneVlaue
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
 
 object AggregateLearn {
   def main(args: Array[String]): Unit = {

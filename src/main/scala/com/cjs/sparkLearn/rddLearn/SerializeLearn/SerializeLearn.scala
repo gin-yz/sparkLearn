@@ -1,17 +1,16 @@
-package com.cjs.sparkLearn.rddLearn.SerializableLearn
+package com.cjs.sparkLearn.rddLearn.SerializeLearn
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
-object SerialLearn {
+object SerializeLearn {
   def main(args: Array[String]): Unit = {
     //1.创建 SparkConf 并设置 App 名称
     val conf: SparkConf = new SparkConf().setAppName("SerialLearnTest").setMaster("local[*]")
     //2.创建 SparkContext，该对象是提交 Spark App 的入口
     val sc: SparkContext = new SparkContext(conf)
     //3.创建一个 RDD
-    val rdd: RDD[String] = sc.makeRDD(Array("hello world", "hello spark",
-      "hive", "atguigu"))
+    val rdd: RDD[String] = sc.makeRDD(Array("hello world", "hello spark", "hive", "atguigu"))
     //3.1 创建一个 Search 对象
     val search = new Search("hello")
     //3.2 函数传递，打印：ERROR Task not serializable
@@ -38,8 +37,8 @@ object SerialLearn {
     //若将ｑｕｅｒｙ重新赋值给另外一个ｓｔｒｉｎｇ，那么ｓｐａｒｋ就不会将其解读成对象的属性，而是解读成ｓｔｒｉｎｇ，因为ｓｔｒｉｎｇ本来就是序列化了，所以不会出错
     def getMatch2(rdd: RDD[String]): RDD[String] = {
       //这样就不需要序列化了
-//      val q= query
-//      rdd.filter(x=>x.contains(q))
+      //      val q= query
+      //      rdd.filter(x=>x.contains(q))
       rdd.filter(x => x.contains(query))
       //val q = query
       //rdd.filter(x => x.contains(q))
@@ -48,7 +47,7 @@ object SerialLearn {
     //此方法不用进行序列化,因为返回的就是一个ｔｒｕｅ，而ｔｒｕｅ已经自动序列化了
     def getMatch3(rdd: RDD[String]): RDD[String] = {
       //rdd.filter(x => x.contains(this.query))
-      rdd.filter(_=>true)
+      rdd.filter(_ => true)
       //val q = query
       //rdd.filter(x => x.contains(q))
     }

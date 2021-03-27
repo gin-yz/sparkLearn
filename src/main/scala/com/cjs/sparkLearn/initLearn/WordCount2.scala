@@ -4,7 +4,7 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 import org.slf4j.LoggerFactory
 
-object WordCount {
+object WordCount2 {
   def main(args: Array[String]): Unit = {
     //在集群上跑的时候setMaster("local[*]")不设置
     val conf: SparkConf = new SparkConf().setMaster("local[*]").setAppName("wordcountdemo") //local[*]
@@ -17,16 +17,16 @@ object WordCount {
 //    val value: RDD[String] = sc.textFile("hdfs://hadoop1:8020/tmp/sparklearn/wordcount.txt");
     //默认是按照行来取，一个行分配成一
     val value: RDD[String] = sc.textFile(WordCount.getClass.getResource("./createRDD.txt").toString)
-    println(value.toDebugString)
+    println(value.dependencies)
 
     val value1: RDD[String] = value.flatMap(_.split(" "))
-    println(value1.toDebugString)
+    println(value1.dependencies)
 
     val value2: RDD[(String, Int)] = value1.map((_, 1))
-    println(value2.toDebugString)
+    println(value2.dependencies)
 
     val value3: RDD[(String, Int)] = value2.reduceByKey(_ + _) //reduceByKey将相同key的聚合,对应的操作是在一个ｋｅｙ下
-    println(value3.toDebugString)
+    println(value3.dependencies)
 
     val tuples: Array[(String, Int)] = value3.collect()
 

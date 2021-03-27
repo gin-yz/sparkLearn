@@ -1,8 +1,7 @@
-//会经历ｓｕｆｆｌｅ过程
-package com.cjs.sparkLearn.rddLearn
+package com.cjs.sparkLearn.rddLearn.OneVlaue
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
+import org.apache.spark.{SparkConf, SparkContext}
 
 object DistinctLearn {
   def main(args: Array[String]): Unit = {

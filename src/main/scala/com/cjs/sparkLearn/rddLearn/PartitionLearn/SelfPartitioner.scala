@@ -1,9 +1,7 @@
-//只有严格遵守key:value的算子，才有partitionBy方法
+package com.cjs.sparkLearn.rddLearn.PartitionLearn
 
-package com.cjs.sparkLearn.rddLearn.KeyValueLearn
-
-import org.apache.spark.{Partitioner, SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
+import org.apache.spark.{Partitioner, SparkConf, SparkContext}
 
 object SelfPartitioner {
 
@@ -11,6 +9,7 @@ object SelfPartitioner {
     override def numPartitions: Int = partitions //分区数
 
     override def getPartition(key: Any): Int = {
+      println(key)
       key.hashCode() % numPartitions
     }
   }
@@ -29,4 +28,3 @@ object SelfPartitioner {
 
   }
 }
-

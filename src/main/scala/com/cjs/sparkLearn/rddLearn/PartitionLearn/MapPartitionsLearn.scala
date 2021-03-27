@@ -1,4 +1,4 @@
-package com.cjs.sparkLearn.rddLearn
+package com.cjs.sparkLearn.rddLearn.PartitionLearn
 
 import java.net.URL
 
@@ -18,11 +18,15 @@ object MapPartitionsLearn {
     //打印每个分区
     value.foreachPartition(item => println(item.toList))
 
+    println("************")
+
     //每个分区进行操作，将一个分区的数据发给一个exector
     //若用map,则数据要一个一个的发给excultor
     val value1: RDD[String] = value.mapPartitions(_.map(item => (item.toInt * 2).toString))
 
     value1.foreachPartition(item => println(item.toList))
+
+    println("***********")
 
     //mapPartitionsWithIndex使用
     //将每一个分区中数据生成(分区号,数据)

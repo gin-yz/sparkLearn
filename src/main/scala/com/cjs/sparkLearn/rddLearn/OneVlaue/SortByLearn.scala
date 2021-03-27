@@ -1,4 +1,4 @@
-package com.cjs.sparkLearn.rddLearn
+package com.cjs.sparkLearn.rddLearn.OneVlaue
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
@@ -23,7 +23,7 @@ object SortByLearn {
 
     println(value1.collect().toList)
     println(value2.collect().mkString(", "))
-    println(value.sortBy(x=>x,ascending = false).collect().toList)//只降序的排一次
+    println(value.sortBy(x => x, ascending = false).collect().toList) //只降序的排一次
   }
 
 }

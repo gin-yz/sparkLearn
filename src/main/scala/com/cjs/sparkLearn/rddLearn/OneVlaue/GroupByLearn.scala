@@ -1,5 +1,4 @@
-//按照传入的值进行分组，生成(key,Iterable[T])的形式
-package com.cjs.sparkLearn.rddLearn
+package com.cjs.sparkLearn.rddLearn.OneVlaue
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
@@ -11,7 +10,7 @@ object GroupByLearn {
 
     val sc = new SparkContext(conf)
 
-    val value: RDD[Int] = sc.makeRDD(1 to 16,8)
+    val value: RDD[Int] = sc.makeRDD(1 to 16, 8)
 
     val value2 = value.glom()
     println(value2.collect().map(_.toList).toList)

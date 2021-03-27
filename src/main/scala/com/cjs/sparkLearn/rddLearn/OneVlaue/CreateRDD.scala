@@ -1,4 +1,4 @@
-package com.cjs.sparkLearn.rddLearn
+package com.cjs.sparkLearn.rddLearn.OneVlaue
 
 import java.net.URL
 
@@ -33,8 +33,8 @@ object CreateRDD {
     //结果保存
     //    localRDD.flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _).saveAsTextFile("output")
 
-//    val url2: URL = CreateRDD.getClass.getResource("./createRDD3.txt")
-//    sc.textFile(url2.toString,2).saveAsTextFile("output")
+    //    val url2: URL = CreateRDD.getClass.getResource("./createRDD3.txt")
+    //    sc.textFile(url2.toString,2).saveAsTextFile("output")
 
   }
 }
