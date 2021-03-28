@@ -1,5 +1,4 @@
-//按照key的hash分区
-package com.cjs.sparkLearn.rddLearn.KeyValueLearn
+package com.cjs.sparkLearn.rddLearn.PartitionLearn
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{HashPartitioner, SparkConf, SparkContext}
@@ -15,7 +14,7 @@ object HashPartiotionLearn {
     val rdd2: RDD[(Int, String)] = rdd1.partitionBy(new HashPartitioner(2)) //指定分区数
 
     println(rdd2.glom().map(_.toList).collect().mkString(", "))
-//    rdd2.saveAsTextFile("output")
+    //    rdd2.saveAsTextFile("output")
   }
 
 }
