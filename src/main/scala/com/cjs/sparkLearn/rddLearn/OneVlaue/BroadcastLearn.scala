@@ -34,7 +34,7 @@ object BroadcastLearn {
     val rdd2 = sc.makeRDD(List( ("a",1), ("b", 2), ("c", 3), ("d", 4) ),4)
     val list2 = List( ("a",4), ("b", 5), ("c", 6), ("d", 7) )
     // 声明广播变量
-    val broadcast2: Broadcast[List[(String, Int)]] = sc.broadcast(list)
+    val broadcast2: Broadcast[List[(String, Int)]] = sc.broadcast(list2)
     val resultRDD2: RDD[(String, (Int, Int))] = rdd2.map {
       case (key, num) => {
         var num2 = 0

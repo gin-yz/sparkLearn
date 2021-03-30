@@ -1,17 +1,31 @@
 package com.cjs.sparkLearn.testDemo
 
-import org.apache.spark.{SparkConf, SparkContext}
-import org.apache.spark.rdd.RDD
+import java.lang.reflect.Constructor
 
-object Demo1 {
-  def main(args: Array[String]): Unit = {
-    val conf: SparkConf = new SparkConf().setAppName("CombineByKeyLearn").setMaster("local[*]")
-    val sc = new SparkContext(conf)
+object Demo1{
 
-    val input: RDD[(String, Int)] = sc.parallelize(Array(("a", 88), ("b", 95), ("a", 91), ("b", 93), ("a", 95), ("b", 98)), 2)
+  class Fruits(val id: Int, val name: String) {
+    var age: Int = _
 
-    val value: RDD[(String, Int)] = input.combineByKey(x => x, (x: Int, y: Int) => x + y, (x: Int, y: Int) => x + y)
+    def this(id: Int, name: String, age: Int) {
+      this(id, name)
+      this.age = age
+    }
 
-    println(value.collect().toList)
+    def func(): Unit = {
+      println("func invoke")
+    }
   }
+
+
+  def main(args: Array[String]): Unit = {
+    val cjs: Fruits = new Fruits(1, "cjs", 22)
+
+    val value: Constructor[_ <: Fruits] = cjs.getClass.getConstructor(classOf[Int],classOf[String],classOf[Int])
+
+    val fruits: Fruits = value.newInstance(1, "cjsdsg",23)
+
+    println(fruits)
+  }
+
 }

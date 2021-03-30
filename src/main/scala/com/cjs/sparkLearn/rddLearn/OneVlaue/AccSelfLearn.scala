@@ -64,7 +64,7 @@ object AccSelfLearn {
 
     // Driver合并多个累加器
     override def merge(other: AccumulatorV2[String, mutable.Map[String, Long]]): Unit = {
-
+      //引用指向开辟的内存
       val map1 = this.wcMap
       val map2 = other.value
 
