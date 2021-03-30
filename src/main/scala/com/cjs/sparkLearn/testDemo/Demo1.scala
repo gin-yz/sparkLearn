@@ -21,11 +21,11 @@ object Demo1{
   def main(args: Array[String]): Unit = {
     val cjs: Fruits = new Fruits(1, "cjs", 22)
 
-    val value: Constructor[_ <: Fruits] = cjs.getClass.getConstructor(classOf[Int],classOf[String],classOf[Int])
+//    val value: Constructor[_ <: Fruits] = cjs.getClass.getConstructor(classOf[Int],classOf[String],classOf[Int])
 
-    val fruits: Fruits = value.newInstance(1, "cjsdsg",23)
+//    val fruits: Fruits = value.newInstance(1, "cjsdsg",23)
 
-    println(fruits)
+//    println(fruits)
   }
 
 }
