@@ -26,6 +26,9 @@ object Demo1{
 //    val fruits: Fruits = value.newInstance(1, "cjsdsg",23)
 
 //    println(fruits)
+
+    val arr: (Int, Int) = (1,2)
+    println(arr.getClass)
   }
 
 }
